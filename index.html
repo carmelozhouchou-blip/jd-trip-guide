@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>景德镇·篁岭 亲子行 2026.11.11–11.14</title>
+<style>
+  :root{
+    --bg:#f6f3ec;
+    --card:#ffffff;
+    --ink:#26251f;
+    --ink2:#6b675c;
+    --line:#e6e1d3;
+    --pri:#3a7d74;        /* 青瓷绿 */
+    --pri-soft:#e3efec;
+    --aut:#d9782f;        /* 晒秋柿子橙 */
+    --aut-soft:#f9e9db;
+    --blue:#3c6ea5;
+    --blue-soft:#e4edf6;
+    --warn:#b05a2a;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;scroll-padding-top:64px}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);
+    font-size:16px;line-height:1.6;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
+
+  /* ---------- 头部 ---------- */
+  .hero{
+    background:linear-gradient(160deg,#3a7d74 0%,#2c6159 60%,#245049 100%);
+    color:#fff;padding:34px 16px 26px;border-radius:0 0 22px 22px;
+    position:relative;overflow:hidden;
+  }
+  .hero::after{ /* 装饰圆匾（晒秋） */
+    content:"";position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.16), rgba(255,255,255,.05));
+    border:2px dashed rgba(255,255,255,.25);
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .chip{
+    display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+    border-radius:999px;padding:3px 12px;font-size:13px;margin:0 6px 10px 0;
+  }
+  .hero h1{font-size:clamp(24px,7vw,32px);font-weight:700;letter-spacing:.02em;line-height:1.3}
+  .hero .sub{opacity:.92;font-size:14px;margin-top:6px}
+  .countdown{
+    margin-top:14px;display:inline-block;background:rgba(255,255,255,.14);
+    border-radius:10px;padding:8px 14px;font-size:14px;
+  }
+  .countdown b{font-size:20px;font-weight:700;color:#ffd9a8}
+
+  /* ---------- 吸顶导航 ---------- */
+  nav.topnav{
+    position:sticky;top:0;z-index:50;background:rgba(246,243,236,.94);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.topnav .wrap{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+  nav.topnav .wrap::-webkit-scrollbar{display:none}
+  nav.topnav a{
+    flex:none;text-decoration:none;color:var(--ink2);font-size:14px;
+    background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;
+  }
+  nav.topnav a:active{background:var(--pri-soft);color:var(--pri)}
+
+  /* ---------- 通用 ---------- */
+  section{padding:26px 0 4px}
+  h2{font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .num{font-size:12px;color:#fff;background:var(--pri);border-radius:6px;padding:2px 8px;font-weight:500}
+  .sec-sub{color:var(--ink2);font-size:13px;margin-bottom:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+
+  /* ---------- 概览 ---------- */
+  .ov{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ov .card{margin:0;padding:13px 14px;position:relative}
+  .ov .d{font-size:12px;color:var(--ink2)}
+  .ov .t{font-weight:700;font-size:15px;margin:2px 0 4px}
+  .ov .s{font-size:13px;color:var(--ink2);line-height:1.5}
+  .ov .card.hl{background:var(--pri-soft);border-color:#cfe0dc}
+  .ov .card.hl2{background:var(--aut-soft);border-color:#f0d9c2}
+
+  /* ---------- 待办清单 ---------- */
+  .progress{height:8px;background:#ece7da;border-radius:99px;overflow:hidden;margin:10px 0 14px}
+  .progress i{display:block;height:100%;background:var(--pri);border-radius:99px;transition:width .25s}
+  .plabel{font-size:13px;color:var(--ink2)}
+  label.check{
+    display:flex;gap:11px;align-items:flex-start;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer;
+  }
+  label.check:last-child{border-bottom:none}
+  label.check input{width:19px;height:19px;flex:none;margin-top:3px;accent-color:var(--pri)}
+  label.check .ct{flex:1}
+  label.check .ct b{font-weight:600;font-size:15px;display:block}
+  label.check .ct span{font-size:13px;color:var(--ink2);display:block;margin-top:1px}
+  label.check .when{
+    flex:none;font-size:12px;color:var(--warn);background:#f7ede2;border-radius:6px;padding:2px 8px;margin-top:2px;white-space:nowrap;
+  }
+  label.check.done .ct b{text-decoration:line-through;color:var(--ink2)}
+  label.check.done .when{opacity:.45}
+
+  /* ---------- 日程 tabs ---------- */
+  .daytabs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+  .daytabs::-webkit-scrollbar{display:none}
+  .daytabs button{
+    flex:1;min-width:76px;border:1px solid var(--line);background:var(--card);border-radius:12px;
+    padding:9px 6px;font-size:14px;color:var(--ink2);font-family:inherit;
+  }
+  .daytabs button small{display:block;font-size:11px;opacity:.8}
+  .daytabs button.on{background:var(--pri);border-color:var(--pri);color:#fff;font-weight:600}
+  .daypanel{display:none}
+  .daypanel.on{display:block}
+
+  /* ---------- 时间线 ---------- */
+  .titem{display:flex;gap:10px;padding:0 0 16px 0}
+  .titem:last-child{padding-bottom:2px}
+  .ttime{
+    flex:none;width:46px;font-weight:700;font-size:13px;color:var(--pri);
+    font-variant-numeric:tabular-nums;padding-top:2px;
+  }
+  .tmark{flex:none;width:12px;position:relative}
+  .tmark::before{content:"";position:absolute;top:6px;left:1px;width:10px;height:10px;border-radius:50%;background:var(--pri)}
+  .tmark::after{content:"";position:absolute;top:19px;bottom:-4px;left:5px;width:2px;background:var(--line)}
+  .titem:last-child .tmark::after{display:none}
+  .tbody{flex:1;min-width:0}
+  .tbody .tt{font-weight:600;font-size:15px}
+  .tbody .td{font-size:13.5px;color:var(--ink2);margin-top:1px}
+  .tag{
+    display:inline-block;font-size:12px;background:var(--pri-soft);color:var(--pri);
+    border-radius:6px;padding:2px 8px;margin:5px 4px 0 0;
+  }
+  .tag.warn{background:#f7ede2;color:var(--warn)}
+  .daypanel.d2 .ttime{color:var(--aut)}
+  .daypanel.d2 .tmark::before{background:var(--aut)}
+  .daypanel.d3 .ttime{color:var(--blue)}
+  .daypanel.d3 .tmark::before{background:var(--blue)}
+  .callout{
+    background:var(--aut-soft);border:1px solid #f0d9c2;border-radius:12px;
+    padding:12px 14px;font-size:13.5px;margin:4px 0 16px;
+  }
+  .callout b{color:var(--warn)}
+  .callout.blue{background:var(--blue-soft);border-color:#ccdaeb}
+  .callout.blue b{color:var(--blue)}
+
+  /* ---------- 美食/酒店/预算 ---------- */
+  .food .ft{font-weight:600;font-size:15px}
+  .food .fd{font-size:13.5px;color:var(--ink2);margin-top:2px}
+  .food .fp{font-size:12.5px;color:var(--aut);margin-top:5px}
+  .pill{
+    display:inline-block;font-size:12.5px;border:1px solid var(--line);background:#fbf9f3;
+    border-radius:999px;padding:5px 12px;margin:0 6px 8px 0;color:var(--ink);
+  }
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{ text-align:left;font-weight:600;color:var(--ink2);font-size:13px;padding:8px 6px;border-bottom:2px solid var(--line)}
+  td{padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  td:last-child,th:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  tr.total td{font-weight:700;border-bottom:none;background:#fbf9f3}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+  summary{
+    list-style:none;display:flex;justify-content:space-between;align-items:center;
+    padding:13px 16px;font-weight:600;font-size:15px;cursor:pointer;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:20px;color:var(--ink2);font-weight:400}
+  details[open] summary::after{content:"–"}
+  details .dbody{padding:0 16px 14px;font-size:14px;color:var(--ink2)}
+  details .dbody b{color:var(--ink)}
+  details .dbody p{margin-bottom:8px}
+
+  footer{color:var(--ink2);font-size:12.5px;text-align:center;padding:28px 16px 40px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="chip">👨‍👩‍👦 1 大人 + 12 岁小孩</span><span class="chip">3 晚 4 天</span><span class="chip">🚄 高铁往返</span>
+    </div>
+    <h1>景德镇 · 篁岭晒秋<br>亲子陶瓷之旅</h1>
+    <p class="sub">2026.11.11（周三）— 11.14（周六）｜住丽枫·陶阳里店（瓷都大道），3 晚不换酒店</p>
+    <div class="countdown" id="cd">…</div>
+  </div>
+</header>
+
+<nav class="topnav" aria-label="页内导航">
+  <div class="wrap">
+    <a href="#todo">✅ 待办</a>
+    <a href="#days">📅 每日行动表</a>
+    <a href="#food">🍜 美食</a>
+    <a href="#hotel">🏨 酒店</a>
+    <a href="#budget">💰 预算</a>
+    <a href="#tips">📌 贴士</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= 概览 ================= -->
+<section id="overview">
+  <h2>行程一眼看懂 <span class="num">总览</span></h2>
+  <p class="sec-sub">核心目标：亲手做陶瓷（拉坯+彩绘+烧制寄回）；其余时间晒秋、逛窑、吃本地菜。</p>
+  <div class="ov">
+    <div class="card">
+      <div class="d">11.11 周三 · 到达日</div>
+      <div class="t">🚄 成都 → 景德镇</div>
+      <div class="s">G2191+G1364，20:58 到北站，打车 20 分钟到酒店</div>
+    </div>
+    <div class="card hl">
+      <div class="d">11.12 周四 · 核心日</div>
+      <div class="t">🏺 三宝村做瓷一整天</div>
+      <div class="s">上午拉坯，下午彩绘上釉；晚上御窑博物馆夜景</div>
+    </div>
+    <div class="card hl2">
+      <div class="d">11.13 周五 · 晒秋日</div>
+      <div class="t">🍂 篁岭晒秋一日游</div>
+      <div class="s">包车 1.5h 往返；傍晚回景德镇赶陶溪川夜市</div>
+    </div>
+    <div class="card">
+      <div class="d">11.14 周六 · 返程日</div>
+      <div class="t">🛍 乐天市集 → 回成都</div>
+      <div class="s">市集 09:00–10:30，11:44 发车，武汉换乘回蓉</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 待办 ================= -->
+<section id="todo">
+  <h2>出发前待办 <span class="num">清单</span></h2>
+  <p class="sec-sub">点一下即可勾选，进度会保存在这台手机上。</p>
+  <div class="card">
+    <span class="plabel" id="plabel">已完成 0 / 7</span>
+    <div class="progress"><i id="pbar" style="width:0%"></i></div>
+    <div id="checklist">
+      <label class="check"><input type="checkbox" data-k="hotel"><span class="ct"><b>订酒店 ✅ 已订好</b><span>丽枫·中国陶瓷博物馆陶阳里店（瓷都大道1168号），11.11–11.14 三晚；到店前再确认：是预付单、房型住得下 1 大 1 小</span></span><span class="when">已完成</span></label>
+      <label class="check"><input type="checkbox" data-k="sanzbao"><span class="ct"><b>预约三宝村陶艺工作室</b><span>亲子口碑：不知岛、徐家窑、哈泥族；微信/电话约 11.12 全天场，必须确认「含烧制+邮寄」</span></span><span class="when">提前1–2天</span></label>
+      <label class="check"><input type="checkbox" data-k="car"><span class="ct"><b>订景德镇 ⇄ 篁岭包车</b><span>携程/去哪儿搜「景德镇出发独立包车一日游」，5座约 ¥400–600/天，确认含过路费</span></span><span class="when">提前1–2天</span></label>
+      <label class="check"><input type="checkbox" data-k="letian"><span class="ct"><b>买乐天陶社市集票</b><span>「乐天陶社」公众号，约 ¥30/人，周六上午场；雨天可能取消，出发前看通知</span></span><span class="when">11.10 前后</span></label>
+      <label class="check"><input type="checkbox" data-k="huangling"><span class="ct"><b>买篁岭门票+往返索道</b><span>官网 wyhl.cc 或携程/美团，晒秋季约 ¥165/人，孩子选儿童/学生优惠票</span></span><span class="when">11.12 晚</span></label>
+      <label class="check"><input type="checkbox" data-k="yuyao"><span class="ct"><b>买陶阳里御窑景区票</b><span>「畅游景德镇」公众号，约 ¥50–60/人，周四晚看御窑博物馆夜景用</span></span><span class="when">随时</span></label>
+      <label class="check"><input type="checkbox" data-k="bowng"><span class="ct"><b>蹲博物馆预约（备选）</b><span>「景德镇中国陶瓷博物馆」公众号免费预约，提前7天放票；若乐天市集因雨取消，就周六上午去看「无语菩萨」</span></span><span class="when">11.06</span></label>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 每日行动表 ================= -->
+<section id="days">
+  <h2>每日行动表 <span class="num">按天切换</span></h2>
+  <p class="sec-sub">打车为主（景德镇无地铁），市内打车 10–25 分钟、¥10–30。</p>
+
+  <div class="daytabs" role="tablist" aria-label="选择日期">
+    <button class="on" data-day="d0" role="tab" aria-selected="true">D0 周三<small>11.11 到达</small></button>
+    <button data-day="d1" role="tab" aria-selected="false">D1 周四<small>11.12 做瓷</small></button>
+    <button data-day="d2" role="tab" aria-selected="false">D2 周五<small>11.13 晒秋</small></button>
+    <button data-day="d3" role="tab" aria-selected="false">D3 周六<small>11.14 返程</small></button>
+  </div>
+
+  <!-- D0 -->
+  <div class="daypanel d0 on" id="d0" role="tabpanel">
+    <div class="titem"><div class="ttime">08:40</div><div class="tmark"></div><div class="tbody"><div class="tt">到达成都东站</div><div class="td">提前约 40 分钟进站，身份证直接刷闸</div><span class="tag">检票口 A23（以现场为准）</span></div></div>
+    <div class="titem"><div class="ttime">09:23</div><div class="tmark"></div><div class="tbody"><div class="tt">🚄 G2191 成都东 → 南昌西</div><div class="td">车上 8 小时 57 分：给孩子备零食、下载好的剧和一本书</div><span class="tag">07车 04F（儿童票·靠窗）</span></div></div>
+    <div class="titem"><div class="ttime">12:00</div><div class="tmark"></div><div class="tbody"><div class="tt">🍱 午餐：车上（12306 订餐）</div><div class="td">提前在 12306 App「餐饮·特产」订沿线大站餐食送到座位，或自带面包自热饭；给孩子多备点水果零食</div></div></div>
+    <div class="titem"><div class="ttime">18:20</div><div class="tmark"></div><div class="tbody"><div class="tt">到南昌西，同站换乘</div><div class="td">75 分钟换乘，不出站，跟「便捷换乘」指示牌进候车室</div></div></div>
+    <div class="titem"><div class="ttime">18:40</div><div class="tmark"></div><div class="tbody"><div class="tt">🍜 晚餐：南昌西站·美食广场</div><div class="td">就在候车室旁边，连锁快餐、面馆都有；吃完正好检票上车，到景德镇直接入住休息，夜里不用再找吃的</div></div></div>
+    <div class="titem"><div class="ttime">19:35</div><div class="tmark"></div><div class="tbody"><div class="tt">🚄 G1364 南昌西 → 景德镇北</div><div class="td">1 小时 23 分，正好在车上商量明天做什么瓷器</div></div></div>
+    <div class="titem"><div class="ttime">20:58</div><div class="tmark"></div><div class="tbody"><div class="tt">到景德镇北 → 打车去酒店</div><div class="td">约 20–25 分钟，¥20–30；21:45 前后办入住</div></div></div>
+    <div class="titem"><div class="ttime">21:45</div><div class="tmark"></div><div class="tbody"><div class="tt">办理入住，早点休息</div><div class="td">晚饭已在南昌西站解决；今晚只睡觉，重头戏在明天</div></div></div>
+  </div>
+
+  <!-- D1 -->
+  <div class="daypanel d1" id="d1" role="tabpanel" hidden>
+    <div class="callout"><b>今天最重要：</b>作品烧制需 3–7 天，来不及带走——离店前<b>加工作室微信</b>，烧好后拍照确认再顺丰寄回成都（约一周到家）。</div>
+    <div class="titem"><div class="ttime">08:15</div><div class="tmark"></div><div class="tbody"><div class="tt">🍜 早餐：毛仔特色小吃（人民广场店）</div><div class="td">酒店打车 10 分钟；点冷粉+肉饼汤、饺子粑（分辣/不辣，孩子吃不辣的）、油条包麻糍，人均 ¥15；吃完正好顺路下三宝</div></div></div>
+    <div class="titem"><div class="ttime">09:10</div><div class="tmark"></div><div class="tbody"><div class="tt">打车去三宝国际瓷谷</div><div class="td">约 20 分钟（人民广场出发，一路顺路）；山谷免门票，工作室、画廊、咖啡馆都在步行范围</div></div></div>
+    <div class="titem"><div class="ttime">10:00</div><div class="tmark"></div><div class="tbody"><div class="tt">🏺 上午场：拉坯 / 捏雕</div><div class="td">12 岁可以独立上手，老师一对一带；人均 ¥65–168 的套餐一般含烧制+邮寄</div><span class="tag">亲子口碑：不知岛 / 徐家窑 / 哈泥族</span></div></div>
+    <div class="titem"><div class="ttime">12:00</div><div class="tmark"></div><div class="tbody"><div class="tt">🍜 午餐：世外陶源餐厅（三宝国际陶艺村美术馆店）</div><div class="td">村里最常被推荐的饭店，本地特色菜、好吃不贵；吃完正好在美术馆周边消食逛逛</div></div></div>
+    <div class="titem"><div class="ttime">13:30</div><div class="tmark"></div><div class="tbody"><div class="tt">🎨 下午场：素坯彩绘 + 上釉</div><div class="td">「绘画」的核心环节，画完留在工作室烧制</div></div></div>
+    <div class="titem"><div class="ttime">16:30</div><div class="tmark"></div><div class="tbody"><div class="tt">逛三宝蓬艺术中心 + 收尾</div><div class="td">确认烧制和邮寄信息、加老板微信</div></div></div>
+    <div class="titem"><div class="ttime">18:00</div><div class="tmark"></div><div class="tbody"><div class="tt">回市区晚餐：小梁园（陶阳里店）</div><div class="td">地道景德菜，人均 ¥73，吃完正好逛夜景</div></div></div>
+    <div class="titem"><div class="ttime">19:30</div><div class="tmark"></div><div class="tbody"><div class="tt">御窑博物馆夜景</div><div class="td">红砖拱券亮灯非常震撼；开放到 22:00，21:30 停止入场，提前买好景区票</div></div></div>
+    <div class="titem"><div class="ttime">21:00</div><div class="tmark"></div><div class="tbody"><div class="tt">回酒店休息</div></div></div>
+  </div>
+
+  <!-- D2 -->
+  <div class="daypanel d2" id="d2" role="tabpanel" hidden>
+    <div class="callout"><b>晒秋正当季：</b>篁岭晒秋持续到 12 月上旬，10 月下旬–12 月初可同时看到晒秋、红枫、红柿子。山上比市区凉 3–4°C，给孩子多带一件抓绒。</div>
+    <div class="titem"><div class="ttime">07:00</div><div class="tmark"></div><div class="tbody"><div class="tt">早餐：前台打包（全程唯一一顿酒店饭）</div><div class="td">今天 7:30 就出发，时间来不及——11.12 晚记得跟前台说打包两份；上车后再吃，不耽误行程</div></div></div>
+    <div class="titem"><div class="ttime">07:30</div><div class="tmark"></div><div class="tbody"><div class="tt">🚗 包车出发去篁岭</div><div class="td">约 85 公里 / 1.5 小时，独立包车随停随走</div></div></div>
+    <div class="titem"><div class="ttime">09:00</div><div class="tmark"></div><div class="tbody"><div class="tt">到篁岭，索道上山</div><div class="td">景区 8:30 开放，周五早上人少，索道基本不排队</div><span class="tag">门票+往返索道 ~¥165/人（提前线上买）</span></div></div>
+    <div class="titem"><div class="ttime">09:30</div><div class="tmark"></div><div class="tbody"><div class="tt">🍂 山上游览（约 4 小时）</div><div class="td">经典动线：天街（晒秋圆匾最密集的核心机位）→ 五桂堂晒秋观景台（拍全景）→ 怪屋（倾斜小屋，孩子会玩疯）→ 垒心桥 + 梯田</div><span class="tag">孩子累了可缩到 3 小时精华线</span></div></div>
+    <div class="titem"><div class="ttime">12:00</div><div class="tmark"></div><div class="tbody"><div class="tt">🍜 午餐：天街食府（篁岭天街）· 晒秋宴</div><div class="td">景区官方餐厅，人均 ¥50–60；点晒秋宴套餐，或单点荷包红鲤鱼、糊豆腐、粉蒸肉（记得点当地特色菜，别点普通炒菜）</div></div></div>
+    <div class="titem"><div class="ttime">14:00</div><div class="tmark"></div><div class="tbody"><div class="tt">索道下山，返程景德镇</div><div class="td">14:30 发车，约 16:00–16:30 回到酒店</div></div></div>
+    <div class="titem"><div class="ttime">16:30</div><div class="tmark"></div><div class="tbody"><div class="tt">回酒店休息半小时</div><div class="td">缓一缓，晚上还有夜市</div></div></div>
+    <div class="titem"><div class="ttime">17:00</div><div class="tmark"></div><div class="tbody"><div class="tt">🏮 陶溪川创意夜市</div><div class="td">周五至周日 17:00 出摊（周五正点无缝衔接）；摊主多是陶瓷大学学生，全是原创手工，让孩子自己挑两件小纪念品</div><span class="tag">🍜 晚餐已定：野炉子（陶溪川店）· 小炒黄牛肉</span></div></div>
+    <div class="titem"><div class="ttime">21:00</div><div class="tmark"></div><div class="tbody"><div class="tt">回酒店收拾行李</div><div class="td">明早要退房，提前归置好</div></div></div>
+  </div>
+
+  <!-- D3 -->
+  <div class="daypanel d3" id="d3" role="tabpanel" hidden>
+    <div class="callout blue"><b>换乘提醒：</b>回程在<b>武汉站</b>下车、<b>汉口站</b>上车，是两个站！地铁 4 号线转 2 号线直达约 1 小时（不堵车，推荐），打车约 50 分钟。2 小时 13 分钟换乘够用，到汉口站还能吃碗热干面。</div>
+    <div class="titem"><div class="ttime">08:00</div><div class="tmark"></div><div class="tbody"><div class="tt">起床退房，行李寄存前台</div></div></div>
+    <div class="titem"><div class="ttime">08:05</div><div class="tmark"></div><div class="tbody"><div class="tt">🍜 早餐：毛仔特色小吃（人民广场店）</div><div class="td">退房后打车 10 分钟，冷粉+肉饼汤快速解决（人均 ¥15）；比酒店早餐好吃，也来得及赶市集</div></div></div>
+    <div class="titem"><div class="ttime">08:50</div><div class="tmark"></div><div class="tbody"><div class="tt">打车到雕塑瓷厂（约 8 分钟）</div><div class="td">9:00 开市，时间刚好</div></div></div>
+    <div class="titem"><div class="ttime">09:00</div><div class="tmark"></div><div class="tbody"><div class="tt">🛍 乐天陶社创意市集</div><div class="td">周六上午限定（9:00–12:30）：孤品、原创先锋作品最多，最后的伴手礼在这里买，比机场礼物强一百倍</div><span class="tag warn">雨天可能取消 → 改陶瓷博物馆看无语菩萨（需已预约）或直接从容去车站</span></div></div>
+    <div class="titem"><div class="ttime">10:40</div><div class="tmark"></div><div class="tbody"><div class="tt">回酒店取行李</div></div></div>
+    <div class="titem"><div class="ttime">11:00</div><div class="tmark"></div><div class="tbody"><div class="tt">打车去景德镇北（约 25 分钟）</div><div class="td">11:25 到站，时间从容</div></div></div>
+    <div class="titem"><div class="ttime">11:44</div><div class="tmark"></div><div class="tbody"><div class="tt">🚄 G1415 景德镇北 → 武汉</div><div class="td">14:20 到武汉站</div></div></div>
+    <div class="titem"><div class="ttime">14:20</div><div class="tmark"></div><div class="tbody"><div class="tt">武汉站 → 汉口站换乘</div><div class="td">地铁 4 号线转 2 号线（约 1 小时）或打车（约 50 分钟）</div></div></div>
+    <div class="titem"><div class="ttime">15:00</div><div class="tmark"></div><div class="tbody"><div class="tt">🍜 午餐：蔡林记（汉口站候车厅中央通道店）</div><div class="td">就在汉口站候车厅里：全料热干面+蛋酒，加份三鲜豆皮；吃完正好检票上车</div></div></div>
+    <div class="titem"><div class="ttime">16:33</div><div class="tmark"></div><div class="tbody"><div class="tt">🚄 G3981 汉口 → 成都东</div><div class="td">晚餐在车上：提前 12306 App 订餐或上车买；21:49 到家，行程结束 🎉</div></div></div>
+  </div>
+</section>
+
+<!-- ================= 美食 ================= -->
+<section id="food">
+  <h2>本地人吃的 <span class="num">美食</span></h2>
+  <p class="sec-sub">避开游客店：认准居民区排队摊子和本地老店。</p>
+
+  <div class="card">
+    <div class="ft" style="margin-bottom:8px">🎯 全程 11 顿饭已定店（不纠结，照着吃）</div>
+    <table>
+      <tr><th>吃什么 · 去哪</th><th>哪顿</th></tr>
+      <tr><td>车上 · 12306 App 订餐送到座位</td><td>11.11 午</td></tr>
+      <tr><td>南昌西站·美食广场（候车室旁，换乘时吃）</td><td>11.11 晚</td></tr>
+      <tr><td>毛仔特色小吃（人民广场店）· 冷粉+肉饼汤</td><td>11.12 早</td></tr>
+      <tr><td>世外陶源餐厅（三宝国际陶艺村美术馆店）</td><td>11.12 午</td></tr>
+      <tr><td>小梁园·地道景德菜（陶阳里御窑博物馆店）</td><td>11.12 晚</td></tr>
+      <tr><td>酒店前台打包（7:30 出发赶篁岭，唯一例外）</td><td>11.13 早</td></tr>
+      <tr><td>天街食府·晒秋宴（篁岭天街，人均¥50–60）</td><td>11.13 午</td></tr>
+      <tr><td>野炉子（陶溪川店）· 小炒黄牛肉</td><td>11.13 晚</td></tr>
+      <tr><td>毛仔特色小吃（人民广场店）· 快速一碗粉</td><td>11.14 早</td></tr>
+      <tr><td>蔡林记（汉口站候车厅中央通道店）· 热干面</td><td>11.14 午</td></tr>
+      <tr><td>车上 · 12306 订餐或零食</td><td>11.14 晚</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="ft" style="margin-bottom:8px">早餐碳水四件套（随便找本地人排队的摊）</div>
+    <span class="pill">冷粉 · 厚宽粉+辣椒油萝卜丁</span>
+    <span class="pill">饺子粑 · 透明米皮包萝卜丝/豆角</span>
+    <span class="pill">碱水粑炒鸡蛋 · 窑工扛饿神器</span>
+    <span class="pill">油条包麻糍</span>
+  </div>
+
+  <div class="card food">
+    <div class="ft">乐乐大排档（浙江路店）<span style="font-size:12.5px;color:var(--ink2);font-weight:400"> · 三十年老店</span></div>
+    <div class="fd">黑胡椒罗氏虾、青花瓷饺子粑</div>
+    <div class="fp">本地人常去</div>
+  </div>
+  <div class="card food">
+    <div class="ft">图味美小黄鱼（浙江路店）</div>
+    <div class="fd">地道景德菜，人均约 ¥74</div>
+    <div class="fp">人均 ¥74</div>
+  </div>
+  <div class="card food">
+    <div class="ft">小梁园（陶阳里御窑博物馆店）</div>
+    <div class="fd">看完夜景顺路吃，就近方便</div>
+    <div class="fp">人均 ¥73 · 周四晚安排</div>
+  </div>
+  <div class="card food">
+    <div class="ft">野炉子（陶溪川店）</div>
+    <div class="fd">院子里吃小炒黄牛肉，烟火气十足</div>
+    <div class="fp">周五夜市当天晚饭</div>
+  </div>
+
+  <div class="card">
+    <div class="ft" style="margin-bottom:8px">特色菜点名尝试</div>
+    <span class="pill">瓷泥煨鸡 · 裹瓷泥进窑煨（和主题绝配）</span>
+    <span class="pill">油墩子</span>
+    <span class="pill">苦槠豆腐</span>
+    <span class="pill">盘龙鳝</span>
+  </div>
+  <div class="card">
+    <div class="ft">省钱本地吃法</div>
+    <div class="fd">市发展中心北苑食堂风味档口，节假日对游客开放：平价碱水粑、饺子粑、本地小炒</div>
+  </div>
+</section>
+
+<!-- ================= 酒店 ================= -->
+<section id="hotel">
+  <h2>住哪里 <span class="num">酒店</span></h2>
+  <p class="sec-sub">已订 3 晚（11.11 入住 — 11.14 退房），全程不换酒店。</p>
+  <div class="card food">
+    <div class="ft">✅ 丽枫酒店 · 中国陶瓷博物馆陶阳里店 <span class="tag" style="margin-top:4px">已订 11.11–11.14</span></div>
+    <div class="fd">昌江区瓷都大道1168号。去御窑夜景约 1.5 km（打车 ¥8，饭后可散步）；去陶溪川夜市 4.8 km（打车 12–15 分钟）；去雕塑瓷厂打车约 10 分钟；去北站 20–25 分钟。旁边就是古窑民俗博览区，也是离中国陶瓷博物馆最近的一片。</div>
+  </div>
+  <div class="card">
+    <div class="ft" style="margin-bottom:6px">住这家店要记住的 3 件小事</div>
+    <div class="fd">① 11.11 晚 21:45 才到店——预付/担保单整晚保留，报订单号即可入住<br>② 周五早 7:30 出发去篁岭，赶不上酒店早餐——11.12 晚让前台打包，或便利店解决<br>③ 行动表里的打车时间已按这家店的位置校准（三宝村按 25–30 分钟算）</div>
+  </div>
+</section>
+
+<!-- ================= 预算 ================= -->
+<section id="budget">
+  <h2>花多少 <span class="num">预算</span></h2>
+  <p class="sec-sub">按 1 大 1 小估算，不含高铁票和住宿。</p>
+  <div class="card">
+    <table>
+      <tr><th>项目</th><th>金额</th></tr>
+      <tr><td>三宝村陶艺体验（含烧制邮寄）</td><td>¥150–300</td></tr>
+      <tr><td>篁岭门票+索道 ×2（儿童有优惠）</td><td>≈¥330</td></tr>
+      <tr><td>篁岭包车（一天）</td><td>¥400–600</td></tr>
+      <tr><td>篁岭山上午餐</td><td>≈¥100</td></tr>
+      <tr><td>御窑景区票 ×2</td><td>≈¥120</td></tr>
+      <tr><td>乐天市集门票 ×2</td><td>≈¥60</td></tr>
+      <tr><td>市内打车（3 天）</td><td>¥120–180</td></tr>
+      <tr><td>餐饮（人均 ¥60–80/顿）</td><td>≈¥500</td></tr>
+      <tr class="total"><td>景德镇本地 3 天合计</td><td>¥1800–2400</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 贴士 ================= -->
+<section id="tips">
+  <h2>重要贴士 <span class="num">看这里</span></h2>
+  <p class="sec-sub">点开每一条查看。</p>
+
+  <details>
+    <summary>🏺 烧制的作品怎么带回家？</summary>
+    <div class="dbody">
+      <p>体验时做的坯要 <b>3–7 天</b>烧制，来不及随身带走。<b>选明确含「烧制+邮寄」的套餐</b>，离店前加工作室微信，烧好后对方拍照确认，再顺丰寄回成都（约一周到）。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>🧥 11 月天气与穿衣</summary>
+    <div class="dbody">
+      <p>景德镇约 <b>9–18°C</b>，早晚凉、可能下雨。给孩子带抓绒外套 + 雨伞；<b>篁岭山上再凉 3–4°C</b>，周五多穿一层。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>☔ 乐天市集下雨怎么办？</summary>
+    <div class="dbody">
+      <p>乐天市集<b>雨天可能取消</b>，周五晚看「乐天陶社」公众号通知。取消就改去<b>中国陶瓷博物馆看无语菩萨</b>（免费，但要提前在公众号预约；11.06 记得蹲 11.13/14 场次），或直接从容地去车站。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>🚉 武汉站 ≠ 汉口站</summary>
+    <div class="dbody">
+      <p>回程 <b>14:20 到的是武汉站，16:33 要在汉口站上车</b>。推荐地铁：4 号线 → 洪山广场/中南路换 2 号线 → 汉口火车站，约 1 小时不堵车；打车约 50 分钟。预留 2 小时 13 分钟换乘足够。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>🎫 孩子的优惠票</summary>
+    <div class="dbody">
+      <p>乐天市集有学生优惠票；篁岭买儿童/学生票；陶瓷博物馆 12 岁免费（同样需预约）。<b>带上有照片的学生证或户口本</b>备用。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>取舍说明：无语菩萨 vs 乐天市集</summary>
+    <div class="dbody">
+      <p>乐天市集只有<b>周六上午</b>有、陶瓷博物馆随时能约。若孩子更想看无语菩萨，可放弃市集：9:00–10:30 快闪博物馆，再回酒店取行李，时间同样来得及。</p>
+    </div>
+  </details>
+</section>
+
+</div>
+
+<footer>
+  成都 ⇌ 景德镇 · 篁岭 ｜ 2026.11.11–11.14<br>
+  票价、开放时间与市集安排以各官方公众号当日公告为准
+</footer>
+
+<script>
+(function(){
+  /* 倒计时 / 行程状态 */
+  var cd = document.getElementById('cd');
+  var TRIP_START = new Date(2026,10,11,9,23);   // 2026-11-11 09:23
+  var TRIP_END   = new Date(2026,11,14,21,49);  // 2026-11-14 21:49
+  var now = new Date();
+  function dayDiff(a,b){ return Math.ceil((b-a)/86400000); }
+  if(now < TRIP_START){
+    var d = dayDiff(now, TRIP_START);
+    cd.innerHTML = '距出发还有 <b>' + d + '</b> 天';
+  }else if(now <= TRIP_END){
+    cd.innerHTML = '🧳 行程进行中 · 第 <b>' + (Math.floor((now-TRIP_START)/86400000)+1) + '</b> 天';
+  }else{
+    cd.innerHTML = '行程已结束，期待下一次出发';
+  }
+
+  /* 按天切换：行程期间自动定位到当天 */
+  var tabs = document.querySelectorAll('.daytabs button');
+  var panels = {d0:document.getElementById('d0'),d1:document.getElementById('d1'),d2:document.getElementById('d2'),d3:document.getElementById('d3')};
+  function show(id){
+    tabs.forEach(function(b){
+      var on = b.dataset.day===id;
+      b.classList.toggle('on',on);
+      b.setAttribute('aria-selected', on?'true':'false');
+    });
+    Object.keys(panels).forEach(function(k){
+      panels[k].classList.toggle('on', k===id);
+      if(k===id){panels[k].removeAttribute('hidden');}else{panels[k].setAttribute('hidden','');}
+    });
+  }
+  var autoDay = 'd0';
+  if(now >= new Date(2026,10,12) && now < new Date(2026,10,13)) autoDay='d1';
+  else if(now >= new Date(2026,10,13) && now < new Date(2026,10,14)) autoDay='d2';
+  else if(now >= new Date(2026,10,14)) autoDay='d3';
+  show(autoDay);
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(){ show(b.dataset.day); });
+  });
+
+  /* 待办清单：localStorage 持久化 */
+  var KEY='jdztodo2026';
+  var boxes = document.querySelectorAll('#checklist input[type=checkbox]');
+  var saved = {};
+  try{ saved = JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+  function refresh(){
+    var total=boxes.length, done=0;
+    boxes.forEach(function(c){
+      var row=c.closest('label.check');
+      row.classList.toggle('done', c.checked);
+      if(c.checked) done++;
+    });
+    document.getElementById('plabel').textContent='已完成 '+done+' / '+total;
+    document.getElementById('pbar').style.width=(total? Math.round(done/total*100):0)+'%';
+  }
+  boxes.forEach(function(c){
+    if(saved[c.dataset.k]) c.checked=true;
+    c.addEventListener('change',function(){
+      var s={};
+      boxes.forEach(function(x){ if(x.checked) s[x.dataset.k]=true; });
+      try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){}
+      refresh();
+    });
+  });
+  refresh();
+})();
+</script>
+</body>
+</html>
